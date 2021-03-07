@@ -1,0 +1,7 @@
+astro\_ph.search module
+=======================
+
+.. automodule:: astro_ph.search
+   :members:
+   :undoc-members:
+   :show-inheritance:

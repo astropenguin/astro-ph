@@ -1,0 +1,7 @@
+astro\_ph.apps module
+=====================
+
+.. automodule:: astro_ph.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:

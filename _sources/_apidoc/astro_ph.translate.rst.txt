@@ -1,0 +1,7 @@
+astro\_ph.translate module
+==========================
+
+.. automodule:: astro_ph.translate
+   :members:
+   :undoc-members:
+   :show-inheritance:

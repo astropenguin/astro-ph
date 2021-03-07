@@ -1,0 +1,7 @@
+astro\_ph.article module
+========================
+
+.. automodule:: astro_ph.article
+   :members:
+   :undoc-members:
+   :show-inheritance:

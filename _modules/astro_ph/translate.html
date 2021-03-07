@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>astro_ph.translate &#8212; Python  documentation</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/logo.svg" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../index.html">Home</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../_apidoc/astro_ph.html">Package guide</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/astropenguin/astro-ph/" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/astropengu_in/" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for astro_ph.translate</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+
+<span class="c1"># standard library</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">auto</span><span class="p">,</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">getLogger</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Awaitable</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+
+
+<span class="c1"># third-party packages</span>
+<span class="kn">from</span> <span class="nn">pyppeteer</span> <span class="kn">import</span> <span class="n">launch</span>
+<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Protocol</span>
+
+
+<span class="c1"># constants</span>
+<span class="n">DEEPL_URL</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;https://www.deepl.com/translator&quot;</span>
+<span class="n">JS_FUNC</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;element =&gt; element.textContent&quot;</span>
+<span class="n">SELECTOR</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;.lmt__translations_as_text__text_btn&quot;</span>
+<span class="n">TIMEOUT</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
+
+
+<span class="c1"># module-level logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="c1"># enums</span>
+<div class="viewcode-block" id="Language"><a class="viewcode-back" href="../../_apidoc/astro_ph.translate.html#astro_ph.translate.Language">[docs]</a><span class="k">class</span> <span class="nc">Language</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Available languages for translation.&quot;&quot;&quot;</span>
+
+    <span class="n">AUTO</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Auto language detection</span>
+    <span class="n">DE</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: German</span>
+    <span class="n">EN</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: English</span>
+    <span class="n">FR</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: French</span>
+    <span class="n">IT</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Italian</span>
+    <span class="n">JA</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Japanese</span>
+    <span class="n">ES</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Spanish</span>
+    <span class="n">NL</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Dutch</span>
+    <span class="n">PL</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Polish</span>
+    <span class="n">PT</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Portuguese</span>
+    <span class="n">RU</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Russian</span>
+    <span class="n">ZH</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>  <span class="c1">#: Chinese</span></div>
+
+
+<span class="c1"># type hints</span>
+<div class="viewcode-block" id="Translatable"><a class="viewcode-back" href="../../_apidoc/astro_ph.translate.html#astro_ph.translate.Translatable">[docs]</a><span class="k">class</span> <span class="nc">Translatable</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Protocol that defines translatable objects.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return text to be translated.&quot;&quot;&quot;</span>
+        <span class="o">...</span>
+
+<div class="viewcode-block" id="Translatable.replace"><a class="viewcode-back" href="../../_apidoc/astro_ph.translate.html#astro_ph.translate.Translatable.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">translated</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Translatable</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Replace text with translated one.&quot;&quot;&quot;</span>
+        <span class="o">...</span></div></div>
+
+
+<div class="viewcode-block" id="Translator"><a class="viewcode-back" href="../../_apidoc/astro_ph.translate.html#astro_ph.translate.Translator">[docs]</a><span class="k">class</span> <span class="nc">Translator</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Protocol that defines translator objects.&quot;&quot;&quot;</span>
+
+    <span class="n">lang_from</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Language</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>  <span class="c1">#: Language of original text.</span>
+    <span class="n">lang_to</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Language</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>  <span class="c1">#: Language for translated text.</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Timeout for translation (in seconds).</span>
+
+<div class="viewcode-block" id="Translator.translate"><a class="viewcode-back" href="../../_apidoc/astro_ph.translate.html#astro_ph.translate.Translator.translate">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Translatable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">Translatable</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Translate object written in one language to another.&quot;&quot;&quot;</span>
+        <span class="o">...</span></div></div>
+
+
+<span class="c1"># data classes</span>
+<div class="viewcode-block" id="DeepL"><a class="viewcode-back" href="../../_apidoc/astro_ph.translate.html#astro_ph.translate.DeepL">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">DeepL</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;DeepL class for translating text.&quot;&quot;&quot;</span>
+
+    <span class="n">lang_from</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Language</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Language</span><span class="o">.</span><span class="n">AUTO</span>  <span class="c1">#: Language of original text.</span>
+    <span class="n">lang_to</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Language</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Language</span><span class="o">.</span><span class="n">AUTO</span>  <span class="c1">#: Language for translated text.</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TIMEOUT</span>  <span class="c1">#: Timeout for translation (in seconds).</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_from</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lang_from</span> <span class="o">=</span> <span class="n">Language</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_from</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_to</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lang_to</span> <span class="o">=</span> <span class="n">Language</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_to</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">base_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Base URL of translation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DEEPL_URL</span><span class="si">}</span><span class="s2">#/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_from</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_to</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="DeepL.translate"><a class="viewcode-back" href="../../_apidoc/astro_ph.translate.html#astro_ph.translate.DeepL.translate">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Translatable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">Translatable</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Translate object written in one language to another.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang_from</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang_to</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="n">translated</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translate_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">translated</span><span class="p">)</span></div>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_translate_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Translate text written in one language to another.&quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">:</span><span class="s2">.300</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+        <span class="n">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="n">launch</span><span class="p">()</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">newPage</span><span class="p">()</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">setDefaultNavigationTimeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="n">completion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translation_completion</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">completion</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">type</span><span class="p">(</span><span class="n">err</span><span class="p">)(</span><span class="s2">&quot;Translation was timed out.&quot;</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_translation_completion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Wait for completion of translation and return result.&quot;&quot;&quot;</span>
+        <span class="n">translated</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">translated</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">element</span> <span class="o">=</span> <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">querySelector</span><span class="p">(</span><span class="n">SELECTOR</span><span class="p">)</span>
+            <span class="n">translated</span> <span class="o">=</span> <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">JS_FUNC</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">translated</span></div>
+
+
+<span class="c1"># utility functions</span>
+<div class="viewcode-block" id="translate"><a class="viewcode-back" href="../../_apidoc/astro_ph.translate.html#astro_ph.translate.translate">[docs]</a><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Translatable</span><span class="p">,</span>
+    <span class="n">lang_to</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Language</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Language</span><span class="o">.</span><span class="n">AUTO</span><span class="p">,</span>
+    <span class="n">lang_from</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Language</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Language</span><span class="o">.</span><span class="n">AUTO</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TIMEOUT</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Translatable</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Translate object written in one language to another.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        obj: Object whose text is to be translated.</span>
+<span class="sd">        lang_to: Language for translated text.</span>
+<span class="sd">        lang_from: Language of original text.</span>
+<span class="sd">        timeout: Timeout for translation (in seconds).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Translated object.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">deepl</span> <span class="o">=</span> <span class="n">DeepL</span><span class="p">(</span><span class="n">lang_from</span><span class="p">,</span> <span class="n">lang_to</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">deepl</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2021 Akio Taniguchi.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

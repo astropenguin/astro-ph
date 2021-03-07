@@ -1,0 +1,21 @@
+astro\_ph package
+=================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   astro_ph.apps
+   astro_ph.article
+   astro_ph.search
+   astro_ph.translate
+
+Module contents
+---------------
+
+.. automodule:: astro_ph
+   :members:
+   :undoc-members:
+   :show-inheritance:

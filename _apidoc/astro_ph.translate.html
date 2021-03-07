@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>astro_ph.translate module &#8212; Python  documentation</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="astro_ph.search module" href="astro_ph.search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../index.html">
+    
+      <img src="../_static/logo.svg" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../index.html">Home</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="astro_ph.html">Package guide</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/astropenguin/astro-ph/" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/astropengu_in/" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+          
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-astro_ph.translate">
+<span id="astro-ph-translate-module"></span><h1>astro_ph.translate module<a class="headerlink" href="#module-astro_ph.translate" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="astro_ph.translate.DeepL">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">astro_ph.translate.</span></code><code class="sig-name descname"><span class="pre">DeepL</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">lang_from:</span> <span class="pre">Union[astro_ph.translate.Language</span></em>, <em class="sig-param"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;Language.AUTO:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">lang_to:</span> <span class="pre">Union[astro_ph.translate.Language</span></em>, <em class="sig-param"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;Language.AUTO:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">timeout:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">60</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astro_ph/translate.html#DeepL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astro_ph.translate.DeepL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>DeepL class for translating text.</p>
+<dl class="py method">
+<dt id="astro_ph.translate.DeepL.base_url">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">base_url</span></code><a class="headerlink" href="#astro_ph.translate.DeepL.base_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base URL of translation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.DeepL.lang_from">
+<code class="sig-name descname"><span class="pre">lang_from</span></code><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#astro_ph.translate.Language" title="astro_ph.translate.Language"><span class="pre">astro_ph.translate.Language</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#astro_ph.translate.DeepL.lang_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Language of original text.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.DeepL.lang_to">
+<code class="sig-name descname"><span class="pre">lang_to</span></code><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#astro_ph.translate.Language" title="astro_ph.translate.Language"><span class="pre">astro_ph.translate.Language</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#astro_ph.translate.DeepL.lang_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Language for translated text.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.DeepL.timeout">
+<code class="sig-name descname"><span class="pre">timeout</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">60</span></em><a class="headerlink" href="#astro_ph.translate.DeepL.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Timeout for translation (in seconds).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astro_ph.translate.DeepL.translate">
+<em class="property"><span class="pre">async</span> </em><code class="sig-name descname"><span class="pre">translate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#astro_ph.translate.Translatable" title="astro_ph.translate.Translatable"><span class="pre">astro_ph.translate.Translatable</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#astro_ph.translate.Translatable" title="astro_ph.translate.Translatable"><span class="pre">astro_ph.translate.Translatable</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/astro_ph/translate.html#DeepL.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astro_ph.translate.DeepL.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate object written in one language to another.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="astro_ph.translate.Language">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">astro_ph.translate.</span></code><code class="sig-name descname"><span class="pre">Language</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astro_ph/translate.html#Language"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astro_ph.translate.Language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Available languages for translation.</p>
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.AUTO">
+<code class="sig-name descname"><span class="pre">AUTO</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#astro_ph.translate.Language.AUTO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auto language detection</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.DE">
+<code class="sig-name descname"><span class="pre">DE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#astro_ph.translate.Language.DE" title="Permalink to this definition">¶</a></dt>
+<dd><p>German</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.EN">
+<code class="sig-name descname"><span class="pre">EN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#astro_ph.translate.Language.EN" title="Permalink to this definition">¶</a></dt>
+<dd><p>English</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.ES">
+<code class="sig-name descname"><span class="pre">ES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">7</span></em><a class="headerlink" href="#astro_ph.translate.Language.ES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spanish</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.FR">
+<code class="sig-name descname"><span class="pre">FR</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#astro_ph.translate.Language.FR" title="Permalink to this definition">¶</a></dt>
+<dd><p>French</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.IT">
+<code class="sig-name descname"><span class="pre">IT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#astro_ph.translate.Language.IT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Italian</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.JA">
+<code class="sig-name descname"><span class="pre">JA</span></code><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#astro_ph.translate.Language.JA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Japanese</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.NL">
+<code class="sig-name descname"><span class="pre">NL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#astro_ph.translate.Language.NL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dutch</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.PL">
+<code class="sig-name descname"><span class="pre">PL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">9</span></em><a class="headerlink" href="#astro_ph.translate.Language.PL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Polish</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.PT">
+<code class="sig-name descname"><span class="pre">PT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#astro_ph.translate.Language.PT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Portuguese</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.RU">
+<code class="sig-name descname"><span class="pre">RU</span></code><em class="property"> <span class="pre">=</span> <span class="pre">11</span></em><a class="headerlink" href="#astro_ph.translate.Language.RU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Russian</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Language.ZH">
+<code class="sig-name descname"><span class="pre">ZH</span></code><em class="property"> <span class="pre">=</span> <span class="pre">12</span></em><a class="headerlink" href="#astro_ph.translate.Language.ZH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chinese</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="astro_ph.translate.Translatable">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">astro_ph.translate.</span></code><code class="sig-name descname"><span class="pre">Translatable</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astro_ph/translate.html#Translatable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astro_ph.translate.Translatable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></p>
+<p>Protocol that defines translatable objects.</p>
+<dl class="py method">
+<dt id="astro_ph.translate.Translatable.replace">
+<code class="sig-name descname"><span class="pre">replace</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#astro_ph.translate.Translatable" title="astro_ph.translate.Translatable"><span class="pre">astro_ph.translate.Translatable</span></a><a class="reference internal" href="../_modules/astro_ph/translate.html#Translatable.replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astro_ph.translate.Translatable.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace text with translated one.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="astro_ph.translate.Translator">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">astro_ph.translate.</span></code><code class="sig-name descname"><span class="pre">Translator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/astro_ph/translate.html#Translator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astro_ph.translate.Translator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></p>
+<p>Protocol that defines translator objects.</p>
+<dl class="py attribute">
+<dt id="astro_ph.translate.Translator.lang_from">
+<code class="sig-name descname"><span class="pre">lang_from</span></code><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#astro_ph.translate.Language" title="astro_ph.translate.Language"><span class="pre">astro_ph.translate.Language</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#astro_ph.translate.Translator.lang_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Language of original text.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Translator.lang_to">
+<code class="sig-name descname"><span class="pre">lang_to</span></code><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#astro_ph.translate.Language" title="astro_ph.translate.Language"><span class="pre">astro_ph.translate.Language</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#astro_ph.translate.Translator.lang_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Language for translated text.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="astro_ph.translate.Translator.timeout">
+<code class="sig-name descname"><span class="pre">timeout</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#astro_ph.translate.Translator.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Timeout for translation (in seconds).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astro_ph.translate.Translator.translate">
+<em class="property"><span class="pre">async</span> </em><code class="sig-name descname"><span class="pre">translate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#astro_ph.translate.Translatable" title="astro_ph.translate.Translatable"><span class="pre">astro_ph.translate.Translatable</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Awaitable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#astro_ph.translate.Translatable" title="astro_ph.translate.Translatable"><span class="pre">astro_ph.translate.Translatable</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/astro_ph/translate.html#Translator.translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astro_ph.translate.Translator.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate object written in one language to another.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="astro_ph.translate.translate">
+<code class="sig-prename descclassname"><span class="pre">astro_ph.translate.</span></code><code class="sig-name descname"><span class="pre">translate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">obj:</span> <span class="pre">astro_ph.translate.Translatable</span></em>, <em class="sig-param"><span class="pre">lang_to:</span> <span class="pre">Union[astro_ph.translate.Language</span></em>, <em class="sig-param"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;Language.AUTO:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">lang_from:</span> <span class="pre">Union[astro_ph.translate.Language</span></em>, <em class="sig-param"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;Language.AUTO:</span> <span class="pre">1&gt;</span></em>, <em class="sig-param"><span class="pre">timeout:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">60</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#astro_ph.translate.Translatable" title="astro_ph.translate.Translatable"><span class="pre">astro_ph.translate.Translatable</span></a><a class="reference internal" href="../_modules/astro_ph/translate.html#translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#astro_ph.translate.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate object written in one language to another.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> – Object whose text is to be translated.</p></li>
+<li><p><strong>lang_to</strong> – Language for translated text.</p></li>
+<li><p><strong>lang_from</strong> – Language of original text.</p></li>
+<li><p><strong>timeout</strong> – Timeout for translation (in seconds).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Translated object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="astro_ph.search.html" title="previous page">astro_ph.search module</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2021 Akio Taniguchi.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

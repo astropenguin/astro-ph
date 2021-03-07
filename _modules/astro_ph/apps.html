@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>astro_ph.apps &#8212; Python  documentation</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/logo.svg" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../index.html">Home</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../_apidoc/astro_ph.html">Package guide</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/astropenguin/astro-ph/" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/astropengu_in/" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for astro_ph.apps</h1><div class="highlight"><pre>
+<span></span><span class="c1"># standard library</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">getLogger</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AsyncIterable</span><span class="p">,</span>
+    <span class="n">Awaitable</span><span class="p">,</span>
+    <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">Dict</span><span class="p">,</span>
+    <span class="n">Iterable</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">TypeVar</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># third-party packages</span>
+<span class="kn">from</span> <span class="nn">aiohttp</span> <span class="kn">import</span> <span class="n">ClientSession</span>
+<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Protocol</span>
+<span class="kn">from</span> <span class="nn">.translate</span> <span class="kn">import</span> <span class="n">Translator</span>
+<span class="kn">from</span> <span class="nn">.search</span> <span class="kn">import</span> <span class="n">Article</span>
+
+
+<span class="c1"># constants</span>
+<span class="n">TIMEOUT</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">N_CONCURRENT</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+
+
+<span class="c1"># module-level logger</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="c1"># type hints</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">Payload</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="App"><a class="viewcode-back" href="../../_apidoc/astro_ph.apps.html#astro_ph.apps.App">[docs]</a><span class="k">class</span> <span class="nc">App</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Protocol that defines application objects.&quot;&quot;&quot;</span>
+
+    <span class="n">translator</span><span class="p">:</span> <span class="n">Translator</span>  <span class="c1">#: Translator object.</span>
+    <span class="n">n_concurrent</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Number of simultaneous post execution.</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Timeout for each post execution.</span>
+
+<div class="viewcode-block" id="App.post"><a class="viewcode-back" href="../../_apidoc/astro_ph.apps.html#astro_ph.apps.App.post">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">articles</span><span class="p">:</span> <span class="n">AsyncIterable</span><span class="p">[</span><span class="n">Article</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Translate and post articles to somewhere.&quot;&quot;&quot;</span>
+        <span class="o">...</span></div></div>
+
+
+<span class="c1"># data classes</span>
+<div class="viewcode-block" id="Slack"><a class="viewcode-back" href="../../_apidoc/astro_ph.apps.html#astro_ph.apps.Slack">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Slack</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class for posting articles to Slack by incoming webhook.&quot;&quot;&quot;</span>
+
+    <span class="n">translator</span><span class="p">:</span> <span class="n">Translator</span>  <span class="c1">#: Translator object.</span>
+    <span class="n">n_concurrent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">N_CONCURRENT</span>  <span class="c1">#: Number of simultaneous post execution.</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TIMEOUT</span>  <span class="c1">#: Timeout for each post execution (in seconds).</span>
+    <span class="n">webhook_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1">#: URL of Slack incoming webhook.</span>
+
+<div class="viewcode-block" id="Slack.post"><a class="viewcode-back" href="../../_apidoc/astro_ph.apps.html#astro_ph.apps.Slack.post">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">articles</span><span class="p">:</span> <span class="n">AsyncIterable</span><span class="p">[</span><span class="n">Article</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Translate and post articles to Slack.&quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="n">amap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_post</span><span class="p">,</span> <span class="n">articles</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_concurrent</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span></div>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">article</span><span class="p">:</span> <span class="n">Article</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Translate and post an article to Slack.&quot;&quot;&quot;</span>
+        <span class="n">translated</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">translator</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_payload</span><span class="p">(</span><span class="n">article</span><span class="p">,</span> <span class="n">translated</span><span class="p">)</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="k">async</span> <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">webhook_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span> <span class="k">as</span> <span class="n">resp</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">url</span><span class="p">)</span><span class="si">:</span><span class="s2">.300</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_to_payload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original</span><span class="p">:</span> <span class="n">Article</span><span class="p">,</span> <span class="n">translated</span><span class="p">:</span> <span class="n">Article</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Payload</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert article to payload for Slack post.&quot;&quot;&quot;</span>
+        <span class="n">divider</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">divider</span><span class="p">()</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plain_text</span><span class="p">(</span><span class="n">translated</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mrkdwn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*Title:* </span><span class="si">{</span><span class="n">original</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">authors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mrkdwn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*Authors:* </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">original</span><span class="o">.</span><span class="n">authors</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mrkdwn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*Summary:* </span><span class="si">{</span><span class="n">translated</span><span class="o">.</span><span class="n">summary</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="n">buttons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">(</span>
+            <span class="n">elements</span><span class="o">=</span><span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">plain_text</span><span class="p">(</span><span class="s2">&quot;View arXiv&quot;</span><span class="p">),</span>
+                    <span class="n">url</span><span class="o">=</span><span class="n">original</span><span class="o">.</span><span class="n">arxiv_url</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">plain_text</span><span class="p">(</span><span class="s2">&quot;View PDF&quot;</span><span class="p">),</span>
+                    <span class="n">url</span><span class="o">=</span><span class="n">original</span><span class="o">.</span><span class="n">arxiv_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;abs&quot;</span><span class="p">,</span> <span class="s2">&quot;pdf&quot;</span><span class="p">),</span>
+                <span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="n">divider</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">authors</span><span class="p">,</span> <span class="n">summary</span><span class="p">,</span> <span class="n">buttons</span><span class="p">,</span> <span class="n">divider</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">translated</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">blocks</span><span class="o">=</span><span class="n">blocks</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Payload</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Generate a function to create elements of Slack payload.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">element</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Payload</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">element</span></div>
+
+
+<span class="c1"># helper functions</span>
+<div class="viewcode-block" id="amap"><a class="viewcode-back" href="../../_apidoc/astro_ph.apps.html#astro_ph.apps.amap">[docs]</a><span class="k">async</span> <span class="k">def</span> <span class="nf">amap</span><span class="p">(</span>
+    <span class="n">afunc</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">S</span><span class="p">],</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">T</span><span class="p">]],</span>
+    <span class="n">aiterable</span><span class="p">:</span> <span class="n">AsyncIterable</span><span class="p">[</span><span class="n">S</span><span class="p">],</span>
+    <span class="n">n_concurrent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">N_CONCURRENT</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TIMEOUT</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Async map function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        afunc: Coroutine function.</span>
+<span class="sd">        aiterable: Async iterable that yields args of afunc.</span>
+<span class="sd">        n_concurrent: Number of concurrent execution.</span>
+<span class="sd">        timeout: Timeout for each afunc execution (in seconds).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Generator that yields results of afunc.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queue_in</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+    <span class="n">queue_out</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># step 1: create consumer coroutines</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">consume</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+        <span class="k">async</span> <span class="k">def</span> <span class="nf">_consume</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+            <span class="n">arg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">queue_in</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">coro</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">afunc</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">timeout</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">coro</span>
+            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">err</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">queue_out</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="n">queue_in</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">_consume</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">CancelledError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="n">consumers</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_concurrent</span><span class="p">):</span>
+        <span class="n">consumer</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">consume</span><span class="p">())</span>
+        <span class="n">consumers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">consumer</span><span class="p">)</span>
+
+    <span class="c1"># step 2: create register coroutine</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">register</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Awaitable</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">aiterable</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">queue_in</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+        <span class="k">await</span> <span class="n">queue_in</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">consumer</span> <span class="ow">in</span> <span class="n">consumers</span><span class="p">:</span>
+            <span class="n">consumer</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+
+    <span class="c1"># step 3: run coroutines concurrently</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">register</span><span class="p">(),</span> <span class="o">*</span><span class="n">consumers</span><span class="p">)</span>
+
+    <span class="c1"># step 4: return results as a generator</span>
+    <span class="k">def</span> <span class="nf">results</span><span class="p">():</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">queue_out</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="n">queue_out</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">()</span></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2021 Akio Taniguchi.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
